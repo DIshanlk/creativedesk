@@ -34,6 +34,10 @@ COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 # Create uploads directory
 RUN mkdir -p /app/backend/uploads
 
+ENV DATABASE_URL=file:./prisma/prod.db
+ENV NODE_ENV=production
+
 EXPOSE 4002
 
-CMD ["sh", "-c", "cd backend && npx prisma db push --skip-generate && NODE_ENV=production node dist/index.js"]
+# Try dist/index.js (new tsconfig) or dist/src/index.js (legacy layout)
+CMD ["sh", "-c", "cd backend && npx prisma db push --skip-generate && (test -f dist/index.js && node dist/index.js || node dist/src/index.js)"]

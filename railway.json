@@ -1,11 +1,11 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "cd frontend && npm install && npm run build && cd ../backend && npm install && npm run build && npx prisma generate"
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "cd backend && npx prisma migrate deploy && NODE_ENV=production node dist/index.js",
+    "startCommand": "cd backend && npx prisma db push --skip-generate && (test -f dist/index.js && node dist/index.js || node dist/src/index.js)",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 5
   }
