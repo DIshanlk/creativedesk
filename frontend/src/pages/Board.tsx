@@ -72,9 +72,9 @@ function TaskCard({ task, isOverlay = false }: { task: any; isOverlay?: boolean 
                 {task.category.name}
               </span>
             )}
-            {isOverdue && <AlertTriangle className="w-3.5 h-3.5 text-red-500 shrink-0" title="Overdue" />}
+            {isOverdue && <span title="Overdue"><AlertTriangle className="w-3.5 h-3.5 text-red-500 shrink-0" /></span>}
             {!isOverdue && dueDiff !== null && dueDiff >= 0 && dueDiff <= 2 && (
-              <Clock className="w-3.5 h-3.5 text-yellow-500 shrink-0" title={`Due in ${dueDiff}d`} />
+              <span title={`Due in ${dueDiff}d`}><Clock className="w-3.5 h-3.5 text-yellow-500 shrink-0" /></span>
             )}
           </div>
           <div className={clsx(
