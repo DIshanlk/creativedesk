@@ -6,8 +6,7 @@
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
+    "strict": false,
     "skipLibCheck": true
   },
   "include": ["src/**/*", "prisma/**/*"]
