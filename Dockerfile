@@ -10,6 +10,7 @@ RUN npm run build
 # ─── Stage 2: Build Backend ──────────────────────────────────
 FROM node:20-alpine AS backend-build
 WORKDIR /app/backend
+ENV DATABASE_URL=file:./prisma/prod.db
 COPY backend/package*.json ./
 RUN npm install
 COPY backend/ ./
@@ -31,13 +32,15 @@ COPY backend/package.json ./backend/
 # Frontend built files (served as static assets by backend)
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist
 
-# Create uploads directory
+# Create uploads directory + startup script
 RUN mkdir -p /app/backend/uploads
+COPY backend/start.sh /app/backend/start.sh
+RUN chmod +x /app/backend/start.sh
 
 ENV DATABASE_URL=file:./prisma/prod.db
 ENV NODE_ENV=production
+ENV JWT_SECRET=change-this-in-railway-dashboard
 
 EXPOSE 4002
 
-# Try dist/index.js (new tsconfig) or dist/src/index.js (legacy layout)
-CMD ["sh", "-c", "cd backend && npx prisma db push --skip-generate && (test -f dist/index.js && node dist/index.js || node dist/src/index.js)"]
+CMD ["/app/backend/start.sh"]
