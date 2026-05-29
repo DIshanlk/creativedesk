@@ -28,7 +28,8 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // ── Serve React build in production ───────────────────────────
 const isProduction = process.env.NODE_ENV === 'production';
-const FRONTEND_DIST = path.join(process.cwd(), '..', 'frontend', 'dist');
+// Works when cwd is /app/backend (Docker/Railway) or monorepo root in dev
+const FRONTEND_DIST = path.resolve(process.cwd(), '..', 'frontend', 'dist');
 if (isProduction) {
   app.use(express.static(FRONTEND_DIST));
 }

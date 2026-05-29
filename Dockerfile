@@ -36,4 +36,4 @@ RUN mkdir -p /app/backend/uploads
 
 EXPOSE 4002
 
-CMD ["sh", "-c", "cd backend && npx prisma migrate deploy && NODE_ENV=production node dist/index.js"]
+CMD ["sh", "-c", "cd backend && npx prisma db push --skip-generate && NODE_ENV=production node dist/index.js"]
