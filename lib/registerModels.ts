@@ -1,0 +1,15 @@
+import '@/lib/models/User';
+import '@/lib/models/Team';
+import '@/lib/models/TeamMember';
+import '@/lib/models/Space';
+import '@/lib/models/Task';
+import '@/lib/models/Category';
+import '@/lib/models/Label';
+import '@/lib/models/TaskLabel';
+import '@/lib/models/Subtask';
+import '@/lib/models/Comment';
+import '@/lib/models/Attachment';
+import '@/lib/models/ActivityLog';
+import '@/lib/models/Approval';
+import '@/lib/models/LinkedTask';
+import '@/lib/models/Notification';
